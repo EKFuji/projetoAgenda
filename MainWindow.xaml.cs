@@ -44,22 +44,28 @@ namespace agenda
                     ctx.SaveChanges();
                 }
             }
-           /* if (operacao = "alterar")
+           if (operacao == "alterar")
             {
 
-            }*/
-            
+            }
+            this.ListarContatos();
+            this.AlterarBotoes(1);
+            this.LimpaCampos();
 
         }
 
         private void btnInserir_Click(object sender, RoutedEventArgs e)
         {
             this.operacao = "inserir";
+            this.AlterarBotoes(2);
+            txtID.Text = "";
+            txtID.IsEnabled = false;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.ListarContatos();
+            this.AlterarBotoes(1);
         }
         private void ListarContatos()
         {
@@ -71,6 +77,46 @@ namespace agenda
                 //ToList eu estou convertendo para a forma de lista.
 
             }
+        }
+        private void AlterarBotoes(int op)
+        {
+            btnAlterar.IsEnabled = false;
+            btnInserir.IsEnabled = false;
+            btnExcluir.IsEnabled = false;
+            btnCancelar.IsEnabled = false;
+            btnLocalizar.IsEnabled = false;
+            btnSalvar.IsEnabled = false;
+            if (op == 1)
+            {
+                //ativar opções iniciais
+                btnInserir.IsEnabled = true;
+                btnLocalizar.IsEnabled = true;
+            }
+            if (op == 2)
+            {
+                //inserir um valor
+                btnSalvar.IsEnabled = true;
+                btnCancelar.IsEnabled = true;
+            }
+            if (op == 3)
+            {
+                btnAlterar.IsEnabled = true;
+                btnExcluir.IsEnabled = true;
+            }
+        }
+        private void LimpaCampos()
+        {
+            txtID.IsEnabled = true; 
+            txtID.Clear();
+            txtNome.Clear();
+            txtEmail.Clear();
+            txtTel.Clear();
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.AlterarBotoes(1);
+            this.LimpaCampos();
         }
     }
 }
