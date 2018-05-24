@@ -20,9 +20,26 @@ namespace agenda
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string operacao;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnSalvar_Click(object sender, RoutedEventArgs e)
+        {
+            //contato com os dados da tela
+            contato c = new contato();
+            c.nome = txtNome.Text;
+            c.email = txtEmail.Text;
+            c.telefone = txtTel.Text;
+            //gravar no banco de dados
+            using (agendaEntities ctx = new agendaEntities())
+            {
+                ctx.contatos.Add(c);
+                ctx.SaveChanges();
+            }
         }
     }
 }
