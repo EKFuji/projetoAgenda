@@ -8,19 +8,19 @@
         Title="MainWindow" Height="600" Width="800" Loaded="Window_Loaded" WindowStyle="ThreeDBorderWindow">
     <Grid>
         <Label Content="ID" HorizontalAlignment="Left" Margin="29,21,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.333,-1.385" FontWeight="Bold" FontSize="14"/>
-        <TextBox x:Name="txtID"  HorizontalAlignment="Left" Height="23" Margin="29,47,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="728" RenderTransformOrigin="0.917,0.13"/>
+        <TextBox x:Name="txtID"  HorizontalAlignment="Left" Height="23" Margin="29,47,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="67" RenderTransformOrigin="0.917,0.13"/>
         <Label Content="Nome" HorizontalAlignment="Left" Margin="29,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.333,-1.385" FontWeight="Bold" FontSize="14"/>
-        <TextBox x:Name="txtNome"  HorizontalAlignment="Left" Height="23" Margin="29,96,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="728" RenderTransformOrigin="0.917,0.13"/>
-        <Label Content="E-mail" HorizontalAlignment="Left" Margin="29,119,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.333,-1.385" FontWeight="Bold" FontSize="14"/>
-        <TextBox x:Name="txtEmail"  HorizontalAlignment="Left" Height="23" Margin="29,145,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="728" RenderTransformOrigin="0.917,0.13"/>
+        <TextBox x:Name="txtNome" MaxLength="30" HorizontalAlignment="Left" Height="23" Margin="29,96,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="728" RenderTransformOrigin="0.917,0.13"/>
+        <Label Content="E-mail"  HorizontalAlignment="Left" Margin="29,119,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.333,-1.385" FontWeight="Bold" FontSize="14"/>
+        <TextBox x:Name="txtEmail" MaxLength="60"  HorizontalAlignment="Left" Height="23" Margin="29,145,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="728" RenderTransformOrigin="0.917,0.13"/>
         <Label Content="Tefone" HorizontalAlignment="Left" Margin="29,173,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.333,-1.385" FontWeight="Bold" FontSize="14"/>
-        <TextBox x:Name="txtTel"  HorizontalAlignment="Left" Height="23" Margin="29,194,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="728" RenderTransformOrigin="0.917,0.13"/>
+        <TextBox x:Name="txtTel" MaxLength="11" HorizontalAlignment="Left" Height="23" Margin="29,202,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="728" RenderTransformOrigin="0.917,0.13"/>
         <DataGrid x:Name="dgDados" IsReadOnly="True" HorizontalAlignment="Left" Height="208" Margin="29,317,0,0" VerticalAlignment="Top" Width="728" MouseDoubleClick="dgDados_MouseDoubleClick" SelectionMode="Single"/>
         <Button x:Name="btnInserir" Content="Inserir" HorizontalAlignment="Left" Margin="28,241,0,0" VerticalAlignment="Top" Width="114" Height="33" Click="btnInserir_Click" FontSize="14"/>
-        <Button x:Name="btnAlterar" Content="Alterar" HorizontalAlignment="Left" Margin="150,241,0,0" VerticalAlignment="Top" Width="114" Height="33" IsEnabled="False" FontSize="14"/>
+        <Button x:Name="btnAlterar" Content="Alterar" HorizontalAlignment="Left" Margin="150,241,0,0" VerticalAlignment="Top" Width="114" Height="33" IsEnabled="False" FontSize="14" Click="btnAlterar_Click"/>
         <Button x:Name="btnLocalizar" Content="Localizar" HorizontalAlignment="Left" Margin="272,241,0,0" VerticalAlignment="Top" Width="114" Height="33" Click="btnLocalizar_Click" FontSize="14"/>
         <Button x:Name="btnSalvar" Content="Salvar" HorizontalAlignment="Left" Margin="394,241,0,0" VerticalAlignment="Top" Width="114" Height="33" Click="btnSalvar_Click" IsEnabled="False" FontSize="14"/>
-        <Button x:Name="btnExcluir" Content="Excluir" HorizontalAlignment="Left" Margin="642,241,0,0" VerticalAlignment="Top" Width="114" Height="33" IsEnabled="False" FontSize="14"/>
+        <Button x:Name="btnExcluir" Content="Excluir" HorizontalAlignment="Left" Margin="642,241,0,0" VerticalAlignment="Top" Width="114" Height="33" IsEnabled="False" FontSize="14" Click="btnExcluir_Click"/>
         <Button x:Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="516,241,0,0" VerticalAlignment="Top" Width="114" Height="33" IsEnabled="False" Click="btnCancelar_Click" FontSize="14"/>
         <Label x:Name="lblContatos" Content=" " HorizontalAlignment="Left" Margin="618,530,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.404" FontSize="14" Width="164" Height="30"/>
         <Label Content="Lista de Contatos" HorizontalAlignment="Left" Margin="29,286,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>

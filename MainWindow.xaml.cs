@@ -30,23 +30,34 @@ namespace agenda
         private void btnSalvar_Click(object sender, RoutedEventArgs e)
         {
             
-            //contato com os dados da tela
-            contato c = new contato();
-            c.nome = txtNome.Text;
-            c.email = txtEmail.Text;
-            c.telefone = txtTel.Text;
-            if(operacao == "inserir")
+            //gravar no banco de dados
+
+            if (this.operacao == "inserir")
             {
-                //gravar no banco de dados
+                contato c = new contato();
+                c.nome = txtNome.Text;
+                c.email = txtEmail.Text;
+                c.telefone = txtTel.Text;
                 using (agendaEntities ctx = new agendaEntities())
                 {
                     ctx.contatos.Add(c);
                     ctx.SaveChanges();
                 }
             }
-           if (operacao == "alterar")
+           if (this.operacao == "alterar")
             {
-
+                using (agendaEntities ct = new agendaEntities())
+                {
+                    contato c = ct.contatos.Find(Convert.ToInt32(txtID.Text));
+                    if (c!= null)
+                    {
+                       
+                        c.nome = txtNome.Text;
+                        c.email = txtEmail.Text;
+                        c.telefone = txtTel.Text;
+                        ct.SaveChanges();
+                    }
+                }
             }
             this.ListarContatos();
             this.AlterarBotoes(1);
@@ -60,6 +71,7 @@ namespace agenda
             this.AlterarBotoes(2);
             txtID.Text = "";
             txtID.IsEnabled = false;
+            this.LimpaCampos();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -213,9 +225,35 @@ namespace agenda
             {
                 //contato c = (contato)dgDados.Items[dgDados.SelectedIndex];
                 contato c = (contato)dgDados.SelectedItem;
+                txtID.Text = c.id.ToString();
                 txtNome.Text = c.nome;
                 txtEmail.Text = c.email;
                 txtTel.Text = c.telefone;
+                this.AlterarBotoes(3);
+            }
+        }
+
+        private void btnAlterar_Click(object sender, RoutedEventArgs e)
+        {
+            this.operacao = "alterar";
+            this.AlterarBotoes(2);
+            txtID.IsEnabled = false;
+            
+        }
+
+        private void btnExcluir_Click(object sender, RoutedEventArgs e)
+        {
+            using(agendaEntities ctx = new agendaEntities())
+            {
+                contato c = ctx.contatos.Find(Convert.ToInt32(txtID.Text));
+                if(c != null)
+                {
+                    ctx.contatos.Remove(c);
+                    ctx.SaveChanges();
+                }
+                this.ListarContatos();
+                this.AlterarBotoes(1);
+                this.LimpaCampos();
             }
         }
     }
