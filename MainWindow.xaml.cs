@@ -71,6 +71,16 @@ namespace agenda
         {
             using (agendaEntities ctx = new agendaEntities())
             {
+                int a = ctx.contatos.Count();
+
+                /*
+                 int a = ctx.contatos.Sum(c => c.id);
+                  Sum vai somar os contatos
+                  Entre parenteses temos uma função lambda(anonima), um método que não é executado
+                  em si mesmo
+                 */
+                lblContatos.Content = "Total de registros: "+a.ToString();
+
                 var consulta = ctx.contatos;
                 dgDados.ItemsSource = consulta.ToList();
                 //ItemsSource representa a origem de onde se encontra os dados do dgGrid
@@ -117,6 +127,96 @@ namespace agenda
         {
             this.AlterarBotoes(1);
             this.LimpaCampos();
+        }
+
+        private void btnLocalizar_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtID.Text.Trim().Count() > 0)
+            {
+                //buscar pelo código
+                try
+                {
+                    int id = Convert.ToInt32(txtID.Text);
+                    using (agendaEntities ctx = new agendaEntities())
+                    {
+                        var consulta = ctx.contatos;
+                        dgDados.ItemsSource = consulta.ToList();
+                        contato c = ctx.contatos.Find(id);
+                        dgDados.ItemsSource = new contato[1] { c };
+                    }
+                }
+                catch
+                {
+
+                }
+
+            }
+            if (txtNome.Text.Trim().Count() > 0)
+            {
+                //buscar por nome
+                try
+                {
+                    using (agendaEntities ctx = new agendaEntities())
+                    {
+                        var consulta = from c in ctx.contatos
+                                       where c.nome.Contains(txtNome.Text)
+                                       select c;
+                        dgDados.ItemsSource = consulta.ToList();
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+            if (txtEmail.Text.Trim().Count() > 0)
+            {
+                //buscar por email
+                try
+                {
+                    using (agendaEntities ctx = new agendaEntities())
+                    {
+                        var consulta = from c in ctx.contatos
+                                       where c.email.Contains(txtEmail.Text)
+                                       select c;
+                        dgDados.ItemsSource = consulta.ToList();
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+            if (txtTel.Text.Trim().Count() > 0)
+            {
+                //buscar por telefone
+                try
+                {
+                    using (agendaEntities ctx = new agendaEntities())
+                    {
+                        var consulta = from c in ctx.contatos
+                                       where c.telefone.Contains(txtTel.Text)
+                                       select c;
+                        dgDados.ItemsSource = consulta.ToList();
+                    }
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        private void dgDados_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+           if(dgDados.SelectedIndex >= 0)
+            {
+                //contato c = (contato)dgDados.Items[dgDados.SelectedIndex];
+                contato c = (contato)dgDados.SelectedItem;
+                txtNome.Text = c.nome;
+                txtEmail.Text = c.email;
+                txtTel.Text = c.telefone;
+            }
         }
     }
 }
